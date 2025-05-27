@@ -1,0 +1,100 @@
+===========
+Estados_db:
+===========
+Genera registros de ESTADOS hacia una base de datos.
+
+Requisitos:
+SQL Server o equivalente
+Python
+	pip install pyodbc
+
+Nombre base de datos: ACME_EV
+Nombre de tabla: ESTADOS
+Columnas: 
+	IdDispositivo NVARCHAR(20)
+	FechaHora: DATETIME
+	EstadoCarga: SMALLINT
+	OnOff: BIT
+	Estado: SMALLINT
+	Kilometros: INT
+
+
+Ejecucion:
+Recibe de parametros: 
+	IdDispositvo (entero), 
+	Cantidad de registros a generar
+Ver: Estados_bd.bat
+
+===========
+Estados_csv:
+===========
+Genera registros de ESTADOS hacia un archivo CSV.
+
+Requisitos:
+Python
+
+Ejecucion:
+Recibe de parametros: 
+	IdDispositvo (entero), 
+	Cantidad de registros a generar
+Ver: Estados_csv.bat
+
+================
+Estados_mongoDb:
+================
+Genera registros de ESTADOS hacia una base de datos de MongoDB llamada ACME_EV y una coleccion llamada ESTADOS.
+
+Requisitos:
+Motor de Mongo DB.
+Python
+
+Ejecucion:
+Recibe de parametros: 
+	IdDispositvo (entero), 
+	Cantidad de registros a generar
+Ver: Estados_mongoDb.bat
+
+================
+Estados_kafka:
+================
+Genera registros de ESTADOS hacia un "topic" de Kafka llamado "estados".
+
+Requisitos:
+Apache Kafka (configuracion default)
+	Crear el topic "estados"
+Python
+	pip install kafka-python
+	pip install pyodbc
+
+Ejecucion:
+Recibe de parametros: 
+	IdDispositvo (entero), 
+	Cantidad de registros a generar
+Ver: Estados_kafka.bat
+
+=============
+gps_simulator
+=============
+Genera registros de localizacion GPS para 100 vehiculos (usando threading).
+Uso de parametros:
+	sql ---> Genera datos para insertarlos en una base de datos
+	kafka -> Genera datos para publicarlos a la cola "gps" en Kafka
+
+SQL:
+Base de datos: ACME_EV
+Tabla: gps
+	VIN NVARCHAR(20)
+	Fecha DATE
+	Hora TIME
+	Latitud FLOAT
+	Longitud FLOAT
+
+Requisitos:
+Motor de base de datos MS-SQL Server o equivalente
+Apache Kafka (configuracion default)
+	Crear el topic "gps"
+Python
+	pip install kafka-python
+	pip install pyodbc
+
+
