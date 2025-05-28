@@ -4,12 +4,13 @@ import sys
 from datetime import datetime, timedelta
 import pyodbc
 from kafka import KafkaProducer
+import json
 
 # Configuración
 # Universidad Rafael Landivar 14.594983138640472, -90.48318594944504
 LATITUDE_RANGE = (14.5, 14.8)
 LONGITUDE_RANGE = (-90.4, -90.2)
-NUM_VEHICLES = 100
+NUM_VEHICLES = 1000 #maximo numero de conexiones en SQL Server es 32767
 RECORDS_PER_VEHICLE = 2880  # 24 horas, 1 registro cada 30 segundos
 
 # Generar VINs
@@ -54,9 +55,13 @@ def vehicle_simulator(vin, mode):
         """)
         conn.commit()
     elif mode == "kafka":
+        #producer = KafkaProducer(
+        #    bootstrap_servers='localhost:9092',
+        #    value_serializer=lambda v: str(v).encode('utf-8')
+        #)
         producer = KafkaProducer(
             bootstrap_servers='localhost:9092',
-            value_serializer=lambda v: str(v).encode('utf-8')
+            value_serializer=lambda v: json.dumps(v).encode('utf-8')
         )
         topic = "gps"
 
